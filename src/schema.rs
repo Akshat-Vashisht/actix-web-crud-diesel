@@ -2,14 +2,9 @@
 
 diesel::table! {
     posts (id) {
-        id -> Uuid,
-        #[max_length = 255]
+        id -> Int4,
         title -> Varchar,
-        content -> Text,
-        #[max_length = 100]
-        category -> Nullable<Varchar>,
-        published -> Nullable<Bool>,
-        created_at -> Nullable<Timestamptz>,
-        updated_at -> Nullable<Timestamptz>,
+        body -> Text,
+        published -> Bool,
     }
 }
