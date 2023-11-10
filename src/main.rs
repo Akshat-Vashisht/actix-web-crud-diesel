@@ -20,7 +20,10 @@ pub fn establish_connection() -> PgConnection {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
-        App::new().service(web::resource("/get").to(routes::get_posts))
+        App::new()
+        .service(web::resource("/get").to(routes::get_posts))
+        .service(web::resource("/post").to(routes::create_post))
+        .service(web::resource("/update/{id}").to(routes::update_post))
     })
     .bind(("127.0.0.1", 8000))?
     .run()
