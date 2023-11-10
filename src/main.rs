@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpServer, Responder};
+use actix_web::{web, App, HttpServer};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use dotenvy::dotenv;
@@ -24,6 +24,7 @@ async fn main() -> std::io::Result<()> {
         .service(web::resource("/get").to(routes::get_posts))
         .service(web::resource("/post").to(routes::create_post))
         .service(web::resource("/update/{id}").to(routes::update_post))
+        .service(web::resource("/delete/{title}").to(routes::delete_post))
     })
     .bind(("127.0.0.1", 8000))?
     .run()
